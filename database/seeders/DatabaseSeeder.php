@@ -2,22 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // 1. Jalankan Seeder Kategori & Supplier terlebih dahulu
+        $this->call([
+            CategorySeeder::class,
+            SupplierSeeder::class,
         ]);
+
+        // 2. Buat 50 data dummy produk secara otomatis via Factory
+        Product::factory(50)->create();
     }
 }
